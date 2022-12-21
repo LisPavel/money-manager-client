@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "63a2cf734825ec727ac04602",
+        "name": "Asset",
+        "debit": 1,
+        "credit": -1
+    },
+    {
+        "_id": "63a2cf737a0436d7a3db558c",
+        "name": "Income",
+        "debit": -1,
+        "credit": 1
+    },
+    {
+        "_id": "63a2cf73402090e3eb01fe47",
+        "name": "Expense",
+        "debit": 1,
+        "credit": -1
+    }
+]
