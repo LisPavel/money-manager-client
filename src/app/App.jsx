@@ -1,9 +1,10 @@
 import React from "react";
+import AccountTypes from "./layout/accountTypes";
 
 function App() {
     return (
         <div>
-            <h1>Hello world</h1>
+            <AccountTypes />
         </div>
     );
 }
