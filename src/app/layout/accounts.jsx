@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Currency from "../components/currency";
 import accountsService from "../services/accounts.service";
 
 const formatter = Intl.NumberFormat("ru");
@@ -9,23 +10,30 @@ function Accounts() {
         const { data } = await accountsService.getAssets();
         setAssets(data);
     }, []);
+    const total = assets.reduce((sum, a) => (sum += a.amount), 0);
     return (
-        <ul className="grid m-5 list-none rounded-md bg-slate-100 shadow-sm shadow-slate-300">
-            {assets.map((asset) => (
-                <li
-                    key={asset._id}
-                    className="p-3 border-slate-300 border-b last:border-b-0"
-                >
-                    <span className="text-base text-gray-700">
-                        {asset.name}
-                    </span>
-                    <div className="grid grid-cols-3 mt-1 text-xs">
-                        <span>Today: </span>
-                        <span>{formatter.format(asset.amount)}</span>
-                    </div>
-                </li>
-            ))}
-        </ul>
+        <div className="p-3 grid gap-3 ">
+            <div className="flex justify-between bg-slate-100 shadow-sm shadow-slate-300 text-slate-800 p-3 rounded-md items-center">
+                <span className="text-2xl font-semibold">Total:</span>
+                <Currency value={total} />
+            </div>
+            <ul className="grid list-none rounded-md bg-slate-100 shadow-sm shadow-slate-300 text-slate-800">
+                {assets.map((asset) => (
+                    <li
+                        key={asset._id}
+                        className="p-3 border-slate-300 border-b last:border-b-0"
+                    >
+                        <span className="text-base font-semibold">
+                            {asset.name}
+                        </span>
+                        <div className="grid grid-cols-2 mt-1 text-xs items-center">
+                            <span>Today: </span>
+                            <Currency value={asset.amount} />
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 }
 
