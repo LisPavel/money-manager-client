@@ -1,10 +1,10 @@
 import React from "react";
-import AccountTypes from "./layout/accountTypes";
+import Accounts from "./layout/accounts";
 
 function App() {
     return (
-        <div>
-            <AccountTypes />
+        <div className="grid h-screen">
+            <Accounts />
         </div>
     );
 }
