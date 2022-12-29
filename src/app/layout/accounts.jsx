@@ -6,18 +6,21 @@ const formatter = Intl.NumberFormat("ru");
 
 function Accounts() {
     const [assets, setAssets] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(async () => {
         const { data } = await accountsService.getAssets();
         setAssets(data);
+        setLoading(false);
     }, []);
+    if (loading) return <>Loading...</>;
     const total = assets.reduce((sum, a) => (sum += a.amount), 0);
     return (
-        <div className="p-3 grid gap-3 ">
-            <div className="flex justify-between bg-slate-100 shadow-sm shadow-slate-300 text-slate-800 p-3 rounded-md items-center">
+        <div className="assets grid gap-3 overflow-hidden ">
+            <div className="flex justify-between bg-slate-100 shadow-sm shadow-slate-300 text-slate-800 p-3 rounded-md items-center ">
                 <span className="text-2xl font-semibold">Total:</span>
                 <Currency value={total} />
             </div>
-            <ul className="grid list-none rounded-md bg-slate-100 shadow-sm shadow-slate-300 text-slate-800">
+            <ul className="grid list-none rounded-md bg-slate-100 shadow-sm shadow-slate-300 text-slate-800 overflow-y-auto">
                 {assets.map((asset) => (
                     <li
                         key={asset._id}

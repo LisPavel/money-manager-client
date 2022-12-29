@@ -3,7 +3,7 @@ import Accounts from "./layout/accounts";
 
 function App() {
     return (
-        <div>
+        <div className="grid h-screen">
             <Accounts />
         </div>
     );
