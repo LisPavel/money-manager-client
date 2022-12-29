@@ -12,4 +12,9 @@ const getIncome = async () => {
     return response;
 };
 
-export default { getAssets, getIncome };
+const getExpenses = async () => {
+    const response = await httpService.get("LvEfgIS60yfs/data");
+    return response;
+};
+
+export default { getAssets, getIncome, getExpenses };

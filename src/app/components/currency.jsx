@@ -1,10 +1,13 @@
 import React from "react";
+import { numberFormatters } from "../utils/formatters";
 
-function Currency({ value }) {
-    const formatter = Intl.NumberFormat("ru");
-    const className = `font-semibold text-right ${
-        value > 0 ? "text-green-600" : value < 0 ? "text-red-600" : ""
-    }`;
+function Currency({ value, currency, isExpense }) {
+    const formatter = numberFormatters.ru[currency] ?? numberFormatters.ru.rub;
+    const positiveColor = !isExpense ? " text-green-600" : " text-red-600";
+    const negativeColor = isExpense ? " text-green-600" : " text-red-600";
+    const textColor =
+        value > 0 ? positiveColor : value < 0 ? negativeColor : "";
+    const className = `font-semibold text-right${textColor}`;
     return <span className={className}>{formatter.format(value)}</span>;
 }
 
