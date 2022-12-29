@@ -7,4 +7,9 @@ const getAssets = async () => {
     return response;
 };
 
-export default { getAssets };
+const getIncome = async () => {
+    const response = await httpService.get("NfaQRDuEHmV4/data");
+    return response;
+};
+
+export default { getAssets, getIncome };
