@@ -25,7 +25,7 @@ const Expenses = () => {
                         </span>
                         <div className="flex justify-between mt-1 text-xs items-center">
                             <span>Today: </span>
-                            <Currency value={expense.amount} />
+                            <Currency value={expense.amount} isExpense={true} />
                         </div>
                     </ListItem>
                 ))}
