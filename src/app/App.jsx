@@ -1,10 +1,11 @@
 import React from "react";
-import Accounts from "./layout/accounts";
+import Accounts from "./layout/assets";
+import Income from "./layout/income";
 
 function App() {
     return (
         <div className="grid h-screen">
-            <Accounts />
+            <Income />
         </div>
     );
 }
