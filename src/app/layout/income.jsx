@@ -21,8 +21,7 @@ const Income = () => {
                             {income.name}
                         </span>
                         <div className="flex justify-between mt-1 text-xs items-center">
-                            <span>Today: </span>
-                            <Currency value={income.amount} />
+                            <small>{income.description}</small>
                         </div>
                     </ListItem>
                 ))}
