@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { List } from "../../common/list";
 import TransactionItem from "./transaction";
-import { DateTime } from "luxon";
 
 const TransactionsList = ({ items, ...rest }) => {
-    // const startMonth =
     return (
         <>
             <List className="shadow-slate-300 overflow-y-auto transactions-list">

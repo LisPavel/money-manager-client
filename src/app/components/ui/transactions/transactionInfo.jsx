@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Currency from "../../currency";
+import AccountTile from "../accountTile";
 
 const TransactionInfo = ({ data, accountsList }) => {
     const creditAccount = accountsList.find(({ _id }) => _id === data.credit);
@@ -28,14 +29,10 @@ const TransactionInfo = ({ data, accountsList }) => {
                 value={data.amount}
                 className={getCurrencyColor(creditAccount, debitAccount)}
             />
-            <div className="text-slate-500 italic ">
-                <small data-type={creditAccount.type}>
-                    {creditAccount?.name ?? data.debit}
-                </small>
+            <div className="text-slate-500 italic text-sm w-max">
+                <AccountTile data={creditAccount} />
                 {"->"}
-                <small data-type={debitAccount.type}>
-                    {debitAccount?.name ?? data.credit}
-                </small>
+                <AccountTile data={debitAccount} />
             </div>
         </div>
     );

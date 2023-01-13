@@ -1,17 +1,16 @@
+import { groupBy } from "lodash";
 import { DateTime } from "luxon";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import TransactionsList from "../components/ui/transactions/transactionsList";
+import React, { useEffect, useState, useMemo } from "react";
+import TransactionsByDay from "../components/ui/transactions/transactionsByDay";
 import accountsService from "../services/accounts.service";
 import transactionsService from "../services/transactions.service";
-import { isDateBetween } from "../utils/date";
 
 const Transactions = () => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [accountsList, setAccountsList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentDate, setCurrentDate] = useState(
-        DateTime.now().setLocale("ru")
+    const [currentMonth, setCurrentDate] = useState(
+        DateTime.now().startOf("month").setLocale("ru")
     );
 
     useEffect(async () => {
@@ -24,23 +23,33 @@ const Transactions = () => {
         setAccountsList(accountsRes.data);
         setLoading(false);
     }, []);
+    const groupedByMonthAndDay = useMemo(() => {
+        console.log("recalc group by month");
+        const groupedByMonth = groupBy(transactionsList, (tr) =>
+            DateTime.fromMillis(tr.date).startOf("month").toMillis()
+        );
+        const groupedByMonthAndDay = Object.keys(groupedByMonth).reduce(
+            (acc, month) => ({
+                ...acc,
+                [month]: groupBy(groupedByMonth[month], (tr) =>
+                    DateTime.fromMillis(tr.date).startOf("day").toMillis()
+                ),
+            }),
+            {}
+        );
 
-    const start = currentDate.startOf("month");
-    const end = currentDate.endOf("month");
-
-    const inCurrentMonth = isDateBetween(start, end);
-
-    const filteredData = transactionsList.filter((t) => inCurrentMonth(t.date));
+        return groupedByMonthAndDay;
+    }, [transactionsList]);
 
     if (loading) return "Loading ...";
 
     return (
-        <div className="transactions flex flex-col gap-3 overflow-hidden max-h-full h-fit">
+        <div className="transactions flex flex-col gap-3 overflow-hidden max-h-full h-fit text-slate-800">
             <div className="flex mt-2 gap-4 mx-auto items-center">
                 <button
                     className="px-2 py-1 bg-slate-500 text-slate-50 rounded"
                     onClick={() =>
-                        setCurrentDate(currentDate.minus({ months: 1 }))
+                        setCurrentDate(currentMonth.minus({ months: 1 }))
                     }
                 >
                     Prev
@@ -48,22 +57,24 @@ const Transactions = () => {
                 <input
                     type="month"
                     onChange={(ev) =>
-                        setCurrentDate(DateTime.fromISO(ev.target.value))
+                        setCurrentDate(
+                            DateTime.fromISO(ev.target.value).startOf("month")
+                        )
                     }
                     className="bg-transparent outline-none border-none"
-                    value={currentDate.toFormat("yyyy-LL")}
+                    value={currentMonth.toFormat("yyyy-LL")}
                 />
                 <button
                     className="py-1 px-2 bg-slate-500 text-slate-50 rounded"
                     onClick={() =>
-                        setCurrentDate(currentDate.plus({ months: 1 }))
+                        setCurrentDate(currentMonth.plus({ months: 1 }))
                     }
                 >
                     Next
                 </button>
             </div>
-            <TransactionsList
-                items={filteredData}
+            <TransactionsByDay
+                items={groupedByMonthAndDay[currentMonth.toMillis()]}
                 accountsList={accountsList}
             />
         </div>
