@@ -4,7 +4,7 @@ import ListItem from "../components/common/list/listItem";
 import Currency from "../components/currency";
 import accountsService from "../services/accounts.service";
 
-function Accounts() {
+function Assets() {
     const [assets, setAssets] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(async () => {
@@ -26,7 +26,7 @@ function Accounts() {
                         <span className="text-base font-semibold">
                             {asset.name}
                         </span>
-                        <div className="flex justify-between mt-1 text-xs items-center">
+                        <div className="flex justify-between mt-1 text-xs items-center border-0 border-b border-slate-300 pb-1">
                             <span>Today: </span>
                             <Currency value={asset.amount} />
                         </div>
@@ -37,4 +37,4 @@ function Accounts() {
     );
 }
 
-export default Accounts;
+export default Assets;

@@ -23,10 +23,7 @@ const Expenses = () => {
                         <span className="text-base font-semibold">
                             {expense.name}
                         </span>
-                        <div className="flex justify-between mt-1 text-xs items-center">
-                            <span>Today: </span>
-                            <Currency value={expense.amount} isExpense={true} />
-                        </div>
+                        <p className="text-sm mt-1">{expense.description}</p>
                     </ListItem>
                 ))}
             </List>
