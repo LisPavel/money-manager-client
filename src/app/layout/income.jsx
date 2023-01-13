@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { List, ListItem } from "../components/common/list";
-import Currency from "../components/currency";
 import accountsService from "../services/accounts.service";
 
 const Income = () => {

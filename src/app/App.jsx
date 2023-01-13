@@ -1,10 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import NavBar from "./components/ui/navBar";
-import Assets from "./layout/assets";
-import Expenses from "./layout/expenses";
-import Income from "./layout/income";
-import Main from "./layout/main";
 import routes from "./router";
 
 function App() {
