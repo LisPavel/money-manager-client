@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TransactionInfo = ({ data, accountsList }) => {
-    const asset = accountsList.find(({ _id }) => _id === data.credit);
-    const expense = accountsList.find(({ _id }) => _id === data.debit);
+    const creditAccount = accountsList.find(({ _id }) => _id === data.credit);
+    const debitAccount = accountsList.find(({ _id }) => _id === data.debit);
     return (
         <div>
-            <small>{asset?.name ?? data.debit}</small>
+            <small>{creditAccount?.name ?? data.debit}</small>
             {"->"}
-            <small>{expense?.name ?? data.credit}</small>
+            <small>{debitAccount?.name ?? data.credit}</small>
             <small>{data.amount}</small>
         </div>
     );
