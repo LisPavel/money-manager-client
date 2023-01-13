@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ListItem } from "../../common/list";
 import TransactionInfo from "./transactionInfo";
 
@@ -12,6 +13,9 @@ const TransactionItem = ({ data, ...rest }) => {
             <TransactionInfo {...rest} data={data} />
         </ListItem>
     );
+};
+TransactionItem.propTypes = {
+    data: PropTypes.object.isRequired,
 };
 
 export default TransactionItem;

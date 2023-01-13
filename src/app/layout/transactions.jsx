@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { List, ListItem } from "../components/common/list";
 import TransactionsList from "../components/ui/transactions/transactionsList";
 import accountsService from "../services/accounts.service";
 import transactionsService from "../services/transactions.service";

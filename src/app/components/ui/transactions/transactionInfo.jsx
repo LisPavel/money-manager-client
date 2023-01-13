@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const TransactionInfo = ({ data, accountsList }) => {
     const asset = accountsList.find(({ _id }) => _id === data.credit);
@@ -11,6 +12,11 @@ const TransactionInfo = ({ data, accountsList }) => {
             <small>{data.amount}</small>
         </div>
     );
+};
+
+TransactionInfo.propTypes = {
+    data: PropTypes.object.isRequired,
+    accountsList: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TransactionInfo;

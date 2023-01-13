@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { List } from "../../common/list";
 import TransactionItem from "./transaction";
 
@@ -10,6 +11,10 @@ const TransactionsList = ({ items, ...rest }) => {
             ))}
         </List>
     );
+};
+
+TransactionsList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default TransactionsList;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const NavBar = ({ items }) => {
@@ -15,6 +16,13 @@ const NavBar = ({ items }) => {
             </ul>
         </nav>
     );
+};
+
+NavBar.propTypes = {
+    items: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.object),
+        PropTypes.object,
+    ]),
 };
 
 export default NavBar;
