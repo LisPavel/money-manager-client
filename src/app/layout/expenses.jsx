@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { List, ListItem } from "../components/common/list";
-import Currency from "../components/currency";
 import accountsService from "../services/accounts.service";
 
 const Expenses = () => {
@@ -8,6 +7,7 @@ const Expenses = () => {
     const [loading, setLoading] = useState(true);
     useEffect(async () => {
         const { data } = await accountsService.getExpenses();
+        console.log(data.map(({ _id }) => _id));
         setExpensesList(data);
         setLoading(false);
     }, []);

@@ -1,5 +1,4 @@
 import httpService from "./http.service";
-import localStorageService from "./localStorage.service";
 
 const getAssets = async () => {
     // const data = localStorageService.getAssets();
@@ -17,4 +16,10 @@ const getExpenses = async () => {
     return response;
 };
 
-export default { getAssets, getIncome, getExpenses };
+const fetchAll = async () => {
+    const [{ data: assets }, { data: income }, { data: expenses }] =
+        await Promise.all([getAssets(), getIncome(), getExpenses()]);
+    return { data: [].concat(assets, income, expenses) };
+};
+
+export default { getAssets, getIncome, getExpenses, fetchAll };

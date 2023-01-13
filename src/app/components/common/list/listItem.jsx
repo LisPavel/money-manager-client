@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ListItem = ({ className, children, ...rest }) => {
     return (
@@ -6,6 +7,14 @@ const ListItem = ({ className, children, ...rest }) => {
             {children}
         </li>
     );
+};
+
+ListItem.propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+    ]),
 };
 
 export default ListItem;
