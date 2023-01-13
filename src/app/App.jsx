@@ -9,9 +9,9 @@ import routes from "./router";
 
 function App() {
     return (
-        <div className="h-screen bg-slate-50">
+        <div className="h-screen bg-slate-50 flex flex-col">
             <NavBar items={routes} />
-            <div className="container mx-auto">
+            <div className="container mx-auto  overflow-hidden">
                 <Switch>
                     {/* <Route component={Main} path="/" exact={true} />
                     <Route component={Income} path="/income" /> */}

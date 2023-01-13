@@ -2,6 +2,7 @@ import Assets from "../layout/assets";
 import Expenses from "../layout/expenses";
 import Income from "../layout/income";
 import Main from "../layout/main";
+import Transactions from "../layout/transactions";
 
 const routes = {
     "/": {
@@ -24,6 +25,11 @@ const routes = {
         path: "/assets",
         component: Assets,
         name: Assets.name,
+    },
+    "/transactions": {
+        path: "/transactions",
+        component: Transactions,
+        name: Transactions.name,
     },
 };
 

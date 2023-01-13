@@ -8,6 +8,7 @@ const Expenses = () => {
     const [loading, setLoading] = useState(true);
     useEffect(async () => {
         const { data } = await accountsService.getExpenses();
+        console.log(data.map(({ _id }) => _id));
         setExpensesList(data);
         setLoading(false);
     }, []);

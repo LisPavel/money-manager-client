@@ -8,6 +8,7 @@ const Income = () => {
     const [loading, setLoading] = useState(true);
     useEffect(async () => {
         const { data } = await accountsService.getIncome();
+        console.log(data.map(({ _id }) => _id));
         setIncomeList(data);
         setLoading(false);
     }, []);

@@ -9,6 +9,7 @@ function Assets() {
     const [loading, setLoading] = useState(true);
     useEffect(async () => {
         const { data } = await accountsService.getAssets();
+        console.log(data.map(({ _id }) => _id));
         setAssets(data);
         setLoading(false);
     }, []);
