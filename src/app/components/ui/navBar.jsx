@@ -7,7 +7,7 @@ const NavBar = ({ items }) => {
             <ul className="list-none flex gap-1">
                 {Object.keys(items).map((path) => (
                     <li key={path}>
-                        <Link to={path} className="py-2 px-1">
+                        <Link to={path} className="py-2 px-2 block">
                             {items[path].name}
                         </Link>
                     </li>
