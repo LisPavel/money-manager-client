@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Currency from "../../currency";
 import AccountTile from "../accountTile";
+import { useSelector } from "react-redux";
+import { getAccountById } from "../../../store/accounts";
 
 const TransactionInfo = ({ data, accountsList }) => {
-    const creditAccount = accountsList.find(({ _id }) => _id === data.credit);
-    const debitAccount = accountsList.find(({ _id }) => _id === data.debit);
+    const creditAccount = useSelector(getAccountById(data.credit));
+    const debitAccount = useSelector(getAccountById(data.debit));
     const getCurrencyColor = (creditAccount, debitAccount) => {
         if (
             (creditAccount.type === "income" &&

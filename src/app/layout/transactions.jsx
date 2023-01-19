@@ -1,48 +1,31 @@
 import { groupBy } from "lodash";
 import { DateTime } from "luxon";
 import React, { useEffect, useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TransactionsByDay from "../components/ui/transactions/transactionsByDay";
-import accountsService from "../services/accounts.service";
-import transactionsService from "../services/transactions.service";
+import {
+    getTransactionsByMonth,
+    getTransactionsLoadingStatus,
+    loadTransactions,
+} from "../store/transactions";
 
 const Transactions = () => {
-    const [transactionsList, setTransactionsList] = useState([]);
-    const [accountsList, setAccountsList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
     const [currentMonth, setCurrentDate] = useState(
         DateTime.now().startOf("month").setLocale("ru")
     );
-
-    useEffect(async () => {
-        const [transactionsRes, accountsRes] = await Promise.all([
-            transactionsService.fetchAll(),
-            accountsService.fetchAll(),
-        ]);
-
-        setTransactionsList(transactionsRes.data);
-        setAccountsList(accountsRes.data);
-        setLoading(false);
+    useEffect(() => {
+        dispatch(loadTransactions());
     }, []);
-    const groupedByMonthAndDay = useMemo(() => {
-        console.log("recalc group by month");
-        const groupedByMonth = groupBy(transactionsList, (tr) =>
-            DateTime.fromMillis(tr.date).startOf("month").toMillis()
-        );
-        const groupedByMonthAndDay = Object.keys(groupedByMonth).reduce(
-            (acc, month) => ({
-                ...acc,
-                [month]: groupBy(groupedByMonth[month], (tr) =>
-                    DateTime.fromMillis(tr.date).startOf("day").toMillis()
-                ),
-            }),
-            {}
-        );
+    const transactionsLoading = useSelector(getTransactionsLoadingStatus());
+    const transactions = useSelector(
+        getTransactionsByMonth(currentMonth.toMillis())
+    );
+    if (transactionsLoading) return "Loading...";
 
-        return groupedByMonthAndDay;
-    }, [transactionsList]);
-
-    if (loading) return "Loading ...";
-
+    const transactionsGroupedByDay = groupBy(transactions, (tr) =>
+        DateTime.fromMillis(tr.date).startOf("day").toMillis()
+    );
     return (
         <div className="transactions flex flex-col gap-3 overflow-hidden max-h-full h-fit text-slate-800">
             <div className="flex mt-2 gap-4 mx-auto items-center">
@@ -73,10 +56,7 @@ const Transactions = () => {
                     Next
                 </button>
             </div>
-            <TransactionsByDay
-                items={groupedByMonthAndDay[currentMonth.toMillis()]}
-                accountsList={accountsList}
-            />
+            <TransactionsByDay items={transactionsGroupedByDay} />
         </div>
     );
 };

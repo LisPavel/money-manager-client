@@ -63,5 +63,8 @@ export const getIncome = () => (state) => {
 export const getAccountsLoadingStatus = () => (state) => {
     return state.accounts.isLoading;
 };
+export const getAccountById = (id) => (state) => {
+    return state.accounts.entities?.find?.(({ _id }) => _id === id);
+};
 
 export default accountsReducer;
