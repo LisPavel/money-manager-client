@@ -12,14 +12,14 @@ const TransactionInfo = ({ data, accountsList }) => {
                 debitAccount.type === "asset") ||
             (debitAccount.type === "asset" && creditAccount.type === "expense")
         ) {
-            return "text-green-500";
+            return "green";
         }
         if (
             (creditAccount.type === "asset" &&
                 debitAccount.type === "expense") ||
             (debitAccount.type === "income" && creditAccount.type === "asset")
         ) {
-            return "text-red-500";
+            return "red";
         }
     };
 
@@ -27,7 +27,7 @@ const TransactionInfo = ({ data, accountsList }) => {
         <div className="flex flex-col items-end">
             <Currency
                 value={data.amount}
-                className={getCurrencyColor(creditAccount, debitAccount)}
+                color={getCurrencyColor(creditAccount, debitAccount)}
             />
             <div className="text-slate-500 italic text-sm w-max">
                 <AccountTile data={creditAccount} />

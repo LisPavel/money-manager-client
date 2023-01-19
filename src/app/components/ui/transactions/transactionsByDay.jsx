@@ -10,20 +10,13 @@ const TransactionsByDay = ({ items, ...rest }) => {
         daysListRef.current?.scrollTo({ top: 0 });
     }, [items]);
 
-    // const groupedByDay = useMemo(() => {
-    //     console.log("recalc group by day");
-    //     return groupBy(items, (item) =>
-    //         DateTime.fromMillis(item.date).startOf("day").toMillis()
-    //     );
-    // }, [items, month]);
-
     return (
         <ul className="grid gap-4 overflow-y-auto p-2" ref={daysListRef}>
             {Object.keys(items)
                 .map((d) => Number(d))
                 .map((day) => (
                     <li key={day}>
-                        <DayCard day={day}>
+                        <DayCard day={day} balance>
                             <TransactionsList {...rest} items={items[day]} />
                         </DayCard>
                     </li>
