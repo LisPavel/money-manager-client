@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import List from "../components/common/list/list";
 import ListItem from "../components/common/list/listItem";
 import Currency from "../components/currency";
-import accountsService from "../services/accounts.service";
+import { getAssets } from "../store/accounts";
 
 function Assets() {
-    const [assets, setAssets] = useState([]);
-    const [loading, setLoading] = useState(true);
-    useEffect(async () => {
-        const { data } = await accountsService.getAssets();
-        console.log(data.map(({ _id }) => _id));
-        setAssets(data);
-        setLoading(false);
-    }, []);
-    if (loading) return <>Loading...</>;
+    const assets = useSelector(getAssets());
+    console.log(assets);
     const total = assets.reduce((sum, a) => (sum += a.amount), 0);
     const getCurrencyColor = (value) => {
         if (value > 0) {
