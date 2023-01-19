@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { List, ListItem } from "../components/common/list";
-import accountsService from "../services/accounts.service";
+import { getIncome } from "../store/accounts";
 
 const Income = () => {
-    const [incomeList, setIncomeList] = useState([]);
-    const [loading, setLoading] = useState(true);
-    useEffect(async () => {
-        const { data } = await accountsService.getIncome();
-        console.log(data.map(({ _id }) => _id));
-        setIncomeList(data);
-        setLoading(false);
-    }, []);
-    if (loading) return <>Loading...</>;
+    const incomeList = useSelector(getIncome());
     return (
         <div className="income flex flex-col gap-3 overflow-hidden max-h-full h-fit">
             <List className="shadow-slate-300 overflow-y-auto">
