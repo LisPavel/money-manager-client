@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 
 const ListItem = ({ className, children, ...rest }) => {
     return (
-        <li {...rest} className={`border-b last:border-b-0 ${className}`}>
+        <li
+            {...rest}
+            className={`border-b last:border-b-0 hover:bg-slate-200 ${className}`}
+        >
             {children}
         </li>
     );
