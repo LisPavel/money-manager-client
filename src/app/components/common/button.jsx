@@ -5,7 +5,7 @@ const Button = ({ children, className, ...rest }) => {
     return (
         <button
             {...rest}
-            className={`py-1 px-2 bg-slate-500 text-slate-50 rounded${
+            className={`py-1 px-2 bg-slate-500 text-slate-50 rounded disabled:bg-slate-400 active:bg-slate-700 hover:bg-slate-600 ${
                 className ? " " + className : ""
             }`}
         >

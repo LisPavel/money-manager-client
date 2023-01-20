@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 const DayCard = ({ day, children }) => {
     return (
         <div className="rounded-lg p-4 bg-slate-100 shadow-md">
-            <div className="border-b-4 p-2 font-bold border-slate-300 text-xl flex justify-between">
+            <div className="border-b-4 p-2 pt-0 font-bold border-slate-300 text-xl flex justify-between">
                 <div>
                     {DateTime.fromMillis(day)
                         .setLocale("ru")
