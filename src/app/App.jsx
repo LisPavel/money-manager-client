@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import AppLoader from "./components/ui/hoc/appLoader";
 import NavBar from "./components/ui/navBar";
-import routes from "./router";
+import routes from "./routes";
 
 function App() {
     return (
